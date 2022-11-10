@@ -1,35 +1,10 @@
-## PyPoll Instructions
-
-#In this challenge, you are tasked with helping a small, rural town modernize its vote counting process.
-
-#You will be given a set of poll data called [election_data.csv](PyPoll/Resources/election_data.csv). The dataset is composed of three columns: "Voter ID", "County", and "Candidate". Your task is to create a Python script that analyzes the votes and calculates each of the following:
-
-
-
-#* The percentage of votes each candidate won
-
-#* 
-
-
-
-#Your analysis should look similar to the following:
-
-
-
-  #Charles Casper Stockham: 23.049% (85213)
-  #Diana DeGette: 73.812% (272892)
-  #Raymon Anthony Doane: 3.139% (11606)
-  #-------------------------
-  #Winner: Diana DeGette
- # -------------------------
- # ```
-
-#In addition, your final script should both print the analysis to the terminal and export a text file with the results.
+## PyPoll Challenge
+#Import what is needed
 import os
 import csv
 
 
-#Then we state the file we will be using
+#Then we state the file we will be using and declare variables
 poll_csv = os.path.join('Resources', 'election_data.csv')
 candidates = set()
 candidate_list = []
@@ -42,13 +17,14 @@ diana_percent =0.0
 raymon_doane = 0
 raymon_percent = 0.0
 
+#Open the file an read it
 with open(poll_csv) as csvfile:
     csv_reader = csv.reader(csvfile, delimiter=",")
 
     #This establishes the csv file to have a header
     header= next(csv_reader)   
     
-
+    #Go through the rows of the file
     for row in csv_reader:
         
         #First we need to count the total number of votes
@@ -69,10 +45,12 @@ with open(poll_csv) as csvfile:
         candidates.add(row[2])
         candidate_list.append(row)
 
+    #This is figure out the percentages of each candidate
     charles_percent = candidate_count[0] / total_votes
     diana_percent = candidate_count[1] / total_votes
     raymon_percent = candidate_count[2] / total_votes
 
+    #This is to determine who won
     if candidate_count[0] > candidate_count[1] and  candidate_count[0] > candidate_count[2]:
         winner = "Charles Casper Stockham"
     elif candidate_count[1] > candidate_count[0] and  candidate_count[1] > candidate_count[2]:
@@ -100,6 +78,7 @@ with open(poll_csv) as csvfile:
     #* The winner of the election based on popular vote.
     print(f'Winner : {winner}')
 
+#we will use to establish where is txt file will go to
 output_file = os.path.join("analysis","poll_analysis.txt")
 
 with open(output_file, 'w') as txt_file:
