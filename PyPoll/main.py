@@ -4,7 +4,7 @@ import os
 import csv
 
 
-#Then we state the file we will be using and declare variables
+#Then we state the file we will be using and declare variables we will be using
 poll_csv = os.path.join('Resources', 'election_data.csv')
 candidates = set()
 candidate_list = []
